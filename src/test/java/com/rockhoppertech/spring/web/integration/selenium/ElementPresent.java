@@ -8,18 +8,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ElementPresent implements ExpectedCondition<WebElement> {
-	private static final Logger logger = LoggerFactory
-			.getLogger(ElementPresent.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(ElementPresent.class);
 
-	private final By locator;
+    private final By locator;
 
-	public ElementPresent(By locator) {
-		this.locator = locator;
-	}
+    public ElementPresent(By locator) {
+        this.locator = locator;
+    }
 
-	public WebElement apply(WebDriver driver) {
-		logger.debug("searching for " + this.locator);
-		return driver.findElement(this.locator);
-	}
+    public WebElement apply(WebDriver driver) {
+        logger.debug("searching for " + this.locator);
+        return driver.findElement(this.locator);
+    }
 
 }

@@ -13,27 +13,27 @@ import org.slf4j.LoggerFactory;
  * @see http://code.google.com/p/selenium/wiki/PageObjects
  */
 public class HomePage {
-	private WebDriver driver;
-	private static final Logger logger = LoggerFactory
-			.getLogger(HomePage.class);
+    private WebDriver driver;
+    private static final Logger logger = LoggerFactory
+            .getLogger(HomePage.class);
 
-	public HomePage(WebDriver driver, String baseURL) {
-		this.driver = driver;
-		driver.get(baseURL + "/");
-		PageFactory
-				.initElements(new AjaxElementLocatorFactory(driver, 5), this);
+    public HomePage(WebDriver driver, String baseURL) {
+        this.driver = driver;
+        driver.get(baseURL + "/");
+        PageFactory
+                .initElements(new AjaxElementLocatorFactory(driver, 5), this);
 
-		if (!"Home".equals(driver.getTitle())) {
-			throw new IllegalStateException("This is not the Home page");
-		}
-	}
+        if (!"Home".equals(driver.getTitle())) {
+            throw new IllegalStateException("This is not the Home page");
+        }
+    }
 
-	public RegisterPage shouldFindNJInStatesSelect() {
-		WebElement a = driver.findElement(By.xpath("//a"));
-		logger.debug(String.format("found this a element '%s'",
-				a.getAttribute("url")));
-		a.click();
-		return PageFactory.initElements(driver, RegisterPage.class);
-	}
+    public RegisterPage shouldFindNJInStatesSelect() {
+        WebElement a = driver.findElement(By.xpath("//a"));
+        logger.debug(String.format("found this a element '%s'",
+                a.getAttribute("url")));
+        a.click();
+        return PageFactory.initElements(driver, RegisterPage.class);
+    }
 
 }
