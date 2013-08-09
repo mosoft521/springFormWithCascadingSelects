@@ -1,30 +1,23 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <meta name="viewport"
-          content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-    <link rel="stylesheet" href="<c:url value="/resources/page.css" />"
-          type="text/css" media="screen"/>
-    <script type="text/javascript"
-            src="<c:url value="/resources/jquery/1.6/jquery-1.6.1.min.js" />"></script>
-    <script type="text/javascript"
-            src="<c:url value="/resources/jquery-ui/jquery-ui-1.8.10.custom.min.js" />"></script>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <link rel="stylesheet" href="<c:url value="/resources/page.css" />" type="text/css" media="screen"/>
+    <script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery-1.6.1.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/jquery-ui/jquery-ui-1.8.10.custom.min.js" />"></script>
     <script type="text/javascript">
         window.scrollTo(0, 1);
     </script>
-
     <c:url var="findStateCitiesURL" value="/cities"/>
     <c:url var="findStatesURL" value="/states"/>
-
     <!-- http://forum.springsource.org/showthread.php?110258-dual-select-dropdown-lists -->
     <!-- http://api.jquery.com/jQuery.getJSON/ -->
     <script type="text/javascript">
@@ -35,7 +28,7 @@
                             stateName: $(this).val(),
                             ajax: 'true'
                         }, function (data) {
-                            var html = '<option value="">City</option>';
+                            var html = '<option value="">请选择城市</option>';
                             var len = data.length;
                             for (var i = 0; i < len; i++) {
                                 html += '<option value="' + data[i].name + '">'
@@ -48,14 +41,13 @@
                     });
         });
     </script>
-
     <script type="text/javascript">
         $(document).ready(
                 function () {
                     $.getJSON('${findStatesURL}', {
                         ajax: 'true'
                     }, function (data) {
-                        var html = '<option value="">State</option>';
+                        var html = '<option value="">请选择州</option>';
                         var len = data.length;
                         for (var i = 0; i < len; i++) {
                             html += '<option value="' + data[i].name + '">'
@@ -67,7 +59,6 @@
                     });
                 });
     </script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("#city").change(onSelectChange);
@@ -77,14 +68,12 @@
             var selected = $("#city option:selected");
             var output = "";
             if (selected.val() != 0) {
-                output = "You selected City " + selected.text();
+                output = "你选择了城市: " + selected.text();
             }
             $("#output").html(output);
         }
     </script>
-
 </head>
-
 <body>
 <c:if test="${not empty message}">
     <div class="${message.type.cssClass}">${message.text}</div>
@@ -104,33 +93,22 @@
                 </c:when>
             </c:choose>
         </s:bind>
-        <p>Select a State</p>
+        <p>请选择州</p>
     </div>
-
-
     <fieldset>
         <div class="multiple">
-
             <form:select id="usStates" path="usState">
             </form:select>
-
             <form:select id="city" path="city">
-                <form:option value="">City</form:option>
+                <form:option value="">请选择城市</form:option>
             </form:select>
-
         </div>
     </fieldset>
-
-
     <p>
-        <button type="submit">Sign Up</button>
+        <button type="submit">登录</button>
     </p>
 </form:form>
-
 <div id="output">
-
 </div>
-
-
 </body>
 </html>
